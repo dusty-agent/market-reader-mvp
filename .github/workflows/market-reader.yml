@@ -1,0 +1,45 @@
+name: MarketReader Daily
+
+on:
+  schedule:
+    - cron: "40 8 * * 1-5"
+      timezone: "Asia/Seoul"
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          python -m playwright install chromium
+
+      - name: Install FFmpeg
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+
+      - name: Build MarketReader
+        env:
+          KOREAEXIM_EXCHANGE_API_KEY: ${{ secrets.KOREAEXIM_EXCHANGE_API_KEY }}
+          KOREAEXIM_INTEREST_API_KEY: ${{ secrets.KOREAEXIM_INTEREST_API_KEY }}
+        run: |
+          python main.py
+
+      - name: Upload MarketReader video
+        uses: actions/upload-artifact@v4
+        with:
+          name: market-reader
+          path: output/**/market_reader.mp4
+          retention-days: 7

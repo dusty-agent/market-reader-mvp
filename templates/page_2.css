@@ -1,0 +1,608 @@
+/* =========================================================
+   MARKET READER
+   PAGE 2 — ENDING
+   1080 x 1920
+========================================================= */
+
+
+/* =========================================================
+   FONT
+========================================================= */
+
+@font-face {
+
+  font-family: "Pretendard";
+
+  src:
+    url("{{PRETENDARD_FONT}}")
+    format("truetype");
+
+  font-weight: 100 900;
+
+  font-style: normal;
+
+}
+
+
+/* =========================================================
+   VARIABLES
+========================================================= */
+
+:root {
+
+  --paper: #ffffff;
+
+  --gold: #d4af37;
+
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+
+html,
+body {
+
+  width: 1080px;
+
+  height: 1920px;
+
+  margin: 0;
+
+  overflow: hidden;
+
+}
+
+
+body {
+
+  font-family:
+    "Pretendard",
+    Arial,
+    "Noto Sans KR",
+    "Malgun Gothic",
+    sans-serif;
+
+  color: var(--paper);
+
+  background: #07121e;
+
+}
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.page {
+
+  position: relative;
+
+  width: 1080px;
+
+  height: 1920px;
+
+  overflow: hidden;
+
+  background:
+
+    linear-gradient(
+      180deg,
+      rgba(4, 10, 18, 0.30) 0%,
+      rgba(4, 10, 18, 0.42) 42%,
+      rgba(4, 10, 18, 0.64) 100%
+    ),
+
+    url("{{PAGE2_BG}}")
+      center center /
+      cover
+      no-repeat,
+
+    linear-gradient(
+      180deg,
+      #13283e 0%,
+      #07121e 100%
+    );
+
+}
+
+
+/* =========================================================
+   SAFE AREA
+========================================================= */
+
+.safe {
+
+  position: absolute;
+
+  inset: 0 116px;
+
+}
+
+
+/* =========================================================
+   CENTER WRAP
+========================================================= */
+
+.ending-wrap {
+
+  position: absolute;
+
+  top: 50%;
+
+  left: 50%;
+
+  transform:
+    translate(-50%, -50%);
+
+  width: 100%;
+
+  max-width: 848px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  text-align: center;
+
+  text-shadow:
+
+    0 0 6px
+    rgba(
+      255,
+      255,
+      255,
+      0.16
+    ),
+
+    0 0 14px
+    rgba(
+      255,
+      255,
+      255,
+      0.08
+    );
+
+}
+
+
+/* =========================================================
+   BRAND
+========================================================= */
+
+.marketreader-brand {
+
+  font-family:
+    "Brush Script MT",
+    "Segoe Script",
+    cursive;
+
+  font-size: 64px;
+
+  line-height: 1;
+
+  font-weight: 700;
+
+  letter-spacing: -2px;
+
+  color: #ffffff;
+
+  white-space: nowrap;
+
+  text-shadow:
+    0 2px 12px
+    rgba(
+      0,
+      0,
+      0,
+      0.42
+    );
+
+}
+
+
+.brand-arrow {
+
+  margin-left: 4px;
+
+  color: var(--gold);
+
+  font-family:
+    Arial,
+    sans-serif;
+
+  font-size: 24px;
+
+  vertical-align: top;
+
+}
+
+
+.marketreader-label {
+
+  margin-top: 14px;
+
+  font-size: 22px;
+
+  font-weight: 700;
+
+  letter-spacing: 1.5px;
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.82
+    );
+
+}
+
+
+/* =========================================================
+   EYEBROW
+========================================================= */
+
+.ending-eyebrow {
+
+  margin-top: 62px;
+
+  font-size: 31px;
+
+  font-weight: 750;
+
+  letter-spacing: 0.8px;
+
+  color: var(--gold);
+
+}
+
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.ending-title {
+
+  margin:
+    32px
+    auto
+    0;
+
+  width: 100%;
+
+  max-width: 860px;
+
+  font-size: 84px;
+
+  line-height: 1.10;
+
+  font-weight: 800;
+
+  letter-spacing: -3px;
+
+  color: #ffffff;
+
+  word-break: keep-all;
+
+}
+
+
+.ending-title .gold {
+
+  color: var(--gold);
+
+  text-shadow:
+
+    0 0 8px
+    rgba(
+      212,
+      175,
+      55,
+      0.22
+    ),
+
+    0 0 18px
+    rgba(
+      212,
+      175,
+      55,
+      0.10
+    );
+
+}
+
+
+/* =========================================================
+   CTA
+========================================================= */
+
+.ending-actions {
+
+  margin-top: 58px;
+
+  width: 100%;
+
+  max-width: 860px;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      3,
+      1fr
+    );
+
+  gap: 24px;
+
+}
+
+
+.ending-action {
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 16px;
+
+  min-height: 156px;
+
+  border:
+
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      0.12
+    );
+
+  border-radius: 24px;
+
+  background:
+
+    rgba(
+      5,
+      11,
+      18,
+      0.38
+    );
+
+  backdrop-filter:
+    blur(8px);
+
+  box-shadow:
+
+    0 12px 32px
+    rgba(
+      0,
+      0,
+      0,
+      0.18
+    );
+
+}
+
+
+.ending-action-icon {
+
+  height: 62px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-size: 58px;
+
+  line-height: 1;
+
+  color: #ffffff;
+
+}
+
+
+.ending-action.subscribe
+.ending-action-icon {
+
+  color: var(--gold);
+
+}
+
+
+.ending-action-icon.bell {
+  font-size: 50px;
+  transform: none;
+  filter: grayscale(1) brightness(1.8);
+}
+
+
+.ending-action span {
+
+  font-size: 30px;
+
+  font-weight: 700;
+
+  letter-spacing: -0.5px;
+
+  color:
+
+    rgba(
+      255,
+      255,
+      255,
+      0.96
+    );
+
+}
+
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
+
+.ending-description {
+
+  margin-top: 48px;
+
+  font-size: 34px;
+
+  line-height: 1.55;
+
+  font-weight: 500;
+
+  color:
+
+    rgba(
+      255,
+      255,
+      255,
+      0.90
+    );
+
+}
+
+
+/* =========================================================
+   DIVIDER
+========================================================= */
+
+.ending-divider {
+
+  width: 110px;
+
+  height: 4px;
+
+  margin-top: 36px;
+
+  border-radius: 999px;
+
+  background: var(--gold);
+
+}
+
+
+/* =========================================================
+   BOTTOM
+========================================================= */
+
+.ending-bottom {
+
+  margin-top: 28px;
+
+  font-size: 27px;
+
+  font-weight: 500;
+
+  color:
+
+    rgba(
+      255,
+      255,
+      255,
+      0.78
+    );
+
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer {
+
+  position: absolute;
+
+  left: 50%;
+
+  bottom: 39px;
+
+  transform:
+    translateX(-50%);
+
+  width: 690px;
+
+  height: 72px;
+
+  border-top:
+
+    1px solid
+    rgba(
+      255,
+      255,
+      255,
+      0.10
+    );
+
+  display: grid;
+
+  grid-template-columns:
+    1fr
+    1fr
+    1fr;
+
+  align-items: center;
+
+  color:
+
+    rgba(
+      255,
+      255,
+      255,
+      0.50
+    );
+
+  font-size: 16px;
+
+  line-height: 1.35;
+
+  text-align: center;
+
+}
+
+
+.footer .assetpicker {
+
+  font-family:
+    "Brush Script MT",
+    "Segoe Script",
+    cursive;
+
+  font-size: 24px;
+
+  font-weight: 700;
+
+  color:
+
+    rgba(
+      255,
+      255,
+      255,
+      0.72
+    );
+
+}
+
+
+.footer strong {
+
+  color: #c69a27;
+
+  font-weight: 800;
+
+}

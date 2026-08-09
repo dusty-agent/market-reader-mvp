@@ -1,0 +1,14 @@
+.venv/
+.env
+__pycache__/
+*.pyc
+
+output/
+logs/
+
+.vscode/
+
+tools/ffmpeg/*.exe
+
+# generated files
+*.mp4
