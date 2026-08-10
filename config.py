@@ -5,15 +5,21 @@ ASSETS = ROOT / "assets"
 TEMPLATES = ROOT / "templates"
 OUTPUT = ROOT / "output"
 
+# =========================================================
+# VIDEO
+# =========================================================
+
 FINAL_W = 1080
 FINAL_H = 1920
+
 FPS = 30
 
-# 15-second short: enough time to scan 7 rows + a short closing card.
-PAGE1_SECONDS = 10
-PAGE2_SECONDS = 3
-VIDEO_SECONDS = PAGE1_SECONDS + PAGE2_SECONDS
+FX_SECONDS = 7
+KEXIM_SECONDS = 7
+ENDING_SECONDS = 6
 
-# Change only these if you want a 10-second version later:
-# PAGE1_SECONDS = 7
-# PAGE2_SECONDS = 3
+VIDEO_SECONDS = (
+    FX_SECONDS
+    + KEXIM_SECONDS
+    + ENDING_SECONDS
+)

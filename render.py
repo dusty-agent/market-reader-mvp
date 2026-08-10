@@ -509,6 +509,9 @@ def _replace_market_tokens(
 # =========================================================
 # PAGE 2 TOKENS
 # =========================================================
+# =========================================================
+# ENDING TOKENS
+# =========================================================
 
 def _replace_ending_tokens(
     template: str,
@@ -516,13 +519,13 @@ def _replace_ending_tokens(
 
     result = template
 
-    page2_css = _load_css(
-        "page_2.css"
+    ending_css = _load_css(
+        "ending.css"
     )
 
     result = result.replace(
-        "{{PAGE2_CSS}}",
-        page2_css,
+        "{{ENDING_CSS}}",
+        ending_css,
     )
 
     result = result.replace(
@@ -533,22 +536,20 @@ def _replace_ending_tokens(
     )
 
     result = result.replace(
-        "{{PAGE2_BG}}",
+        "{{ENDING_BG}}",
         _asset_data_uri(
             "page2_bg"
         ),
     )
 
     result = result.replace(
-        "{{PAGE2_CTA_BG}}",
+        "{{ENDING_CTA_BG}}",
         _asset_data_uri(
             "page2_cta_bg"
         ),
     )
 
     return result
-
-
 # =========================================================
 # BROWSER
 # =========================================================
@@ -666,81 +667,152 @@ def _screenshot_html(
 def render_pages(
     data: Dict[str, Any],
     output_dir: Path,
-) -> Dict[str, Path]:
+) -> tuple[Path, Path, Path]:
 
     output_dir.mkdir(
         parents=True,
         exist_ok=True,
     )
 
-    page1_template = (
+    # =====================================================
+    # LOAD TEMPLATES
+    # =====================================================
+
+    fx_template = (
         TEMPLATES
-        / "page_1.html"
+        / "page_1_fx.html"
     ).read_text(
         encoding="utf-8"
     )
 
-    page2_template = (
+    kexim_template = (
         TEMPLATES
-        / "page_2.html"
+        / "page_1_kexim.html"
     ).read_text(
         encoding="utf-8"
     )
 
-    page1_html = (
+    ending_template = (
+        TEMPLATES
+        / "ending.html"
+    ).read_text(
+        encoding="utf-8"
+    )
+
+
+    # =====================================================
+    # REPLACE TOKENS
+    #
+    # FX / KEXIM 모두 page_1.css 사용
+    # =====================================================
+
+    fx_html = (
         _replace_market_tokens(
-            page1_template,
+            fx_template,
             data,
         )
     )
 
-    page2_html = (
-        _replace_ending_tokens(
-            page2_template,
+    kexim_html = (
+        _replace_market_tokens(
+            kexim_template,
+            data,
         )
     )
 
-    page1_html_path = (
-        output_dir
-        / "page_1.html"
+    ending_html = (
+        _replace_ending_tokens(
+            ending_template,
+        )
     )
 
-    page2_html_path = (
+
+    # =====================================================
+    # HTML OUTPUT
+    # =====================================================
+
+    fx_html_path = (
         output_dir
-        / "page_2.html"
+        / "page_1_fx.html"
     )
 
-    page1_png_path = (
+    kexim_html_path = (
         output_dir
-        / "page_1.png"
+        / "page_1_kexim.html"
     )
 
-    page2_png_path = (
+    ending_html_path = (
         output_dir
-        / "page_2.png"
+        / "ending.html"
     )
 
-    page1_html_path.write_text(
-        page1_html,
+
+    # =====================================================
+    # PNG OUTPUT
+    # =====================================================
+
+    fx_png_path = (
+        output_dir
+        / "page_1_fx.png"
+    )
+
+    kexim_png_path = (
+        output_dir
+        / "page_1_kexim.png"
+    )
+
+    ending_png_path = (
+        output_dir
+        / "ending.png"
+    )
+
+
+    # =====================================================
+    # WRITE HTML
+    # =====================================================
+
+    fx_html_path.write_text(
+        fx_html,
         encoding="utf-8",
     )
 
-    page2_html_path.write_text(
-        page2_html,
+    kexim_html_path.write_text(
+        kexim_html,
         encoding="utf-8",
     )
 
+    ending_html_path.write_text(
+        ending_html,
+        encoding="utf-8",
+    )
+
+
+    # =====================================================
+    # SCREENSHOT
+    # =====================================================
+
     _screenshot_html(
-        page1_html,
-        page1_png_path,
+        fx_html,
+        fx_png_path,
     )
 
     _screenshot_html(
-        page2_html,
-        page2_png_path,
+        kexim_html,
+        kexim_png_path,
     )
+
+    _screenshot_html(
+        ending_html,
+        ending_png_path,
+    )
+
+
+    # =====================================================
+    # RETURN
+    # =====================================================
 
     return (
-        page1_png_path,
-        page2_png_path,
+        fx_png_path,
+        kexim_png_path,
+        ending_png_path,
     )

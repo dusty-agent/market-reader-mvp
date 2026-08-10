@@ -9,8 +9,9 @@ from config import (
     FINAL_H,
     FINAL_W,
     FPS,
-    PAGE1_SECONDS,
-    PAGE2_SECONDS,
+    FX_SECONDS,
+    KEXIM_SECONDS,
+    ENDING_SECONDS,
     VIDEO_SECONDS,
 )
 
@@ -29,7 +30,9 @@ def _ffmpeg() -> str:
     if configured:
         return configured
 
-    found = shutil.which("ffmpeg")
+    found = shutil.which(
+        "ffmpeg"
+    )
 
     if not found:
         raise RuntimeError(
@@ -45,8 +48,9 @@ def _ffmpeg() -> str:
 # =========================================================
 
 def build_video(
-    page1: Path,
-    page2: Path,
+    fx_page: Path,
+    kexim_page: Path,
+    ending_page: Path,
     output: Path,
     bgm: Path | None = None,
 ) -> Path:
@@ -58,55 +62,116 @@ def build_video(
         exist_ok=True,
     )
 
-    # -----------------------------------------------------
+
+    # =====================================================
+    # Validate
+    # =====================================================
+
+    for path in (
+        fx_page,
+        kexim_page,
+        ending_page,
+    ):
+
+        if not path.exists():
+            raise FileNotFoundError(
+                f"Image not found: {path}"
+            )
+
+
+    # =====================================================
     # Inputs
-    # -----------------------------------------------------
+    # =====================================================
 
     cmd = [
         ffmpeg,
         "-y",
 
-        # Page 1
-        "-loop",
-        "1",
-        "-framerate",
-        str(FPS),
-        "-t",
-        str(PAGE1_SECONDS),
-        "-i",
-        str(page1),
+        # -------------------------------------------------
+        # FX
+        # -------------------------------------------------
 
-        # Page 2
         "-loop",
         "1",
+
         "-framerate",
         str(FPS),
+
         "-t",
-        str(PAGE2_SECONDS),
+        str(FX_SECONDS),
+
         "-i",
-        str(page2),
+        str(fx_page),
+
+
+        # -------------------------------------------------
+        # KEXIM
+        # -------------------------------------------------
+
+        "-loop",
+        "1",
+
+        "-framerate",
+        str(FPS),
+
+        "-t",
+        str(KEXIM_SECONDS),
+
+        "-i",
+        str(kexim_page),
+
+
+        # -------------------------------------------------
+        # ENDING
+        # -------------------------------------------------
+
+        "-loop",
+        "1",
+
+        "-framerate",
+        str(FPS),
+
+        "-t",
+        str(ENDING_SECONDS),
+
+        "-i",
+        str(ending_page),
     ]
+
+
+    # =====================================================
+    # BGM
+    # =====================================================
 
     has_bgm = (
         bgm is not None
         and bgm.exists()
     )
 
+
     if has_bgm:
 
-        # 음악이 영상보다 짧아지는 경우에도 대응
+        # BGM이 20초보다 짧아져도 안전하게 반복.
+        # 현재 20초 BGM이라면 사실상 반복되지 않습니다.
+
         cmd += [
             "-stream_loop",
             "-1",
+
             "-i",
             str(bgm),
         ]
 
-    # -----------------------------------------------------
-    # Video filters
-    # -----------------------------------------------------
+
+    # =====================================================
+    # VIDEO FILTERS
+    # =====================================================
 
     filter_parts = [
+
+        # -------------------------------------------------
+        # FX
+        # -------------------------------------------------
 
         (
             f"[0:v]"
@@ -117,6 +182,11 @@ def build_video(
             f"[v0]"
         ),
 
+
+        # -------------------------------------------------
+        # KEXIM
+        # -------------------------------------------------
+
         (
             f"[1:v]"
             f"scale={FINAL_W}:{FINAL_H},"
@@ -126,30 +196,55 @@ def build_video(
             f"[v1]"
         ),
 
+
+        # -------------------------------------------------
+        # ENDING
+        # -------------------------------------------------
+
         (
-            "[v0][v1]"
-            "concat=n=2:v=1:a=0"
+            f"[2:v]"
+            f"scale={FINAL_W}:{FINAL_H},"
+            f"setsar=1,"
+            f"fps={FPS},"
+            f"format=yuv420p"
+            f"[v2]"
+        ),
+
+
+        # -------------------------------------------------
+        # CONCAT
+        # -------------------------------------------------
+
+        (
+            "[v0][v1][v2]"
+            "concat=n=3:v=1:a=0"
             "[v]"
         ),
     ]
 
-    # -----------------------------------------------------
-    # Audio
-    #
-    # 영상 마지막 1초에 fade-out
-    # 13초 영상 → 12초부터 fade-out
-    # -----------------------------------------------------
+
+    # =====================================================
+    # AUDIO
+    # =====================================================
 
     if has_bgm:
+
+        # 마지막 1초 동안 fade-out
+        #
+        # 20초 영상이면
+        # 19초부터 20초까지 fade-out
 
         fade_start = max(
             VIDEO_SECONDS - 1,
             0,
         )
 
+
+        # BGM은 4번째 input이므로 [3:a]
+
         filter_parts.append(
             (
-                "[2:a]"
+                "[3:a]"
                 f"atrim=duration={VIDEO_SECONDS},"
                 "asetpts=N/SR/TB,"
                 f"afade=t=out:"
@@ -159,9 +254,15 @@ def build_video(
             )
         )
 
+
+    # =====================================================
+    # FILTER COMPLEX
+    # =====================================================
+
     filter_complex = ";".join(
         filter_parts
     )
+
 
     cmd += [
         "-filter_complex",
@@ -171,9 +272,10 @@ def build_video(
         "[v]",
     ]
 
-    # -----------------------------------------------------
-    # Audio output
-    # -----------------------------------------------------
+
+    # =====================================================
+    # AUDIO OUTPUT
+    # =====================================================
 
     if has_bgm:
 
@@ -194,9 +296,10 @@ def build_video(
             "-an",
         ]
 
-    # -----------------------------------------------------
-    # Final output
-    # -----------------------------------------------------
+
+    # =====================================================
+    # FINAL OUTPUT
+    # =====================================================
 
     cmd += [
         "-t",
@@ -217,9 +320,46 @@ def build_video(
         str(output),
     ]
 
+
+    # =====================================================
+    # RUN
+    # =====================================================
+
+    print()
+    print("====================================")
+    print("Building MarketReader Video")
+    print("====================================")
+    print()
+    print(
+        f"FX      : {FX_SECONDS}s"
+    )
+    print(
+        f"KEXIM   : {KEXIM_SECONDS}s"
+    )
+    print(
+        f"ENDING  : {ENDING_SECONDS}s"
+    )
+    print(
+        f"TOTAL   : {VIDEO_SECONDS}s"
+    )
+    print(
+        f"BGM     : "
+        f"{bgm if has_bgm else 'None'}"
+    )
+    print()
+
+
     subprocess.run(
         cmd,
         check=True,
     )
+
+
+    print()
+    print(
+        f"✅ Video complete: {output}"
+    )
+    print()
+
 
     return output

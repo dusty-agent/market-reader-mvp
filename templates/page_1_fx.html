@@ -1,0 +1,241 @@
+<meta
+    name="viewport"
+    content="width=1080, height=1920, initial-scale=1.0"
+>
+
+<style>
+{{PAGE1_CSS}}
+</style>
+
+<div class="page">
+
+    <div class="safe">
+
+
+        <!-- =====================================
+             HEADER
+        ====================================== -->
+
+        <header class="header">
+
+            <div class="marketreader-brand">
+                MarketReader
+
+                <span class="brand-arrow">
+                    ↑
+                </span>
+            </div>
+
+
+            <div class="marketreader-label">
+                DAILY MARKET BOARD
+            </div>
+
+
+            <div class="asof">
+                {{AS_OF}}
+            </div>
+
+        </header>
+
+
+        <!-- =====================================
+             FX BOARD
+        ====================================== -->
+
+        <section class="single-board fx-board">
+
+
+            <div class="single-heading">
+
+                <div>
+
+                    <div class="single-title">
+                        FX
+                    </div>
+
+                    <div class="single-subtitle">
+                        오늘의 주요 환율
+                    </div>
+
+                </div>
+
+
+                <div class="single-date">
+                    기준 {{FX_DATE}}
+                </div>
+
+            </div>
+
+
+            <!-- COLUMN -->
+
+            <div class="fx-columns">
+
+                <div>
+                    MARKET
+                </div>
+
+                <div>
+                    LATEST
+                </div>
+
+                <div>
+                    CHANGE
+                </div>
+
+            </div>
+
+
+            <!-- USD -->
+
+            <div class="fx-row">
+
+                <div class="asset">
+
+                    <span class="currency">
+                        $
+                    </span>
+
+                    <span>
+                        USD/KRW
+                    </span>
+
+                </div>
+
+
+                <div class="latest">
+                    {{USD_KRW_VALUE}}
+                </div>
+
+
+                <div class="change {{USD_KRW_CLASS}}">
+
+                    <span class="change-arrow">
+                        {{USD_KRW_ARROW}}
+                    </span>
+
+                    <span>
+                        {{USD_KRW_CHANGE}}
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- JPY -->
+
+            <div class="fx-row">
+
+                <div class="asset">
+
+                    <span class="currency">
+                        ¥
+                    </span>
+
+                    <span>
+                        JPY/KRW
+                    </span>
+
+                </div>
+
+
+                <div class="latest">
+                    {{JPY_KRW_VALUE}}
+                </div>
+
+
+                <div class="change {{JPY_KRW_CLASS}}">
+
+                    <span class="change-arrow">
+                        {{JPY_KRW_ARROW}}
+                    </span>
+
+                    <span>
+                        {{JPY_KRW_CHANGE}}
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- EUR -->
+
+            <div class="fx-row">
+
+                <div class="asset">
+
+                    <span class="currency">
+                        €
+                    </span>
+
+                    <span>
+                        EUR/KRW
+                    </span>
+
+                </div>
+
+
+                <div class="latest">
+                    {{EUR_KRW_VALUE}}
+                </div>
+
+
+                <div class="change {{EUR_KRW_CLASS}}">
+
+                    <span class="change-arrow">
+                        {{EUR_KRW_ARROW}}
+                    </span>
+
+                    <span>
+                        {{EUR_KRW_CHANGE}}
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             SOURCE
+        ====================================== -->
+
+        <div class="source">
+            SOURCE : {{SOURCE}}
+        </div>
+
+
+        <!-- =====================================
+             FOOTER
+        ====================================== -->
+
+        <footer class="footer">
+
+            <div class="assetpicker">
+                Asset Picker
+            </div>
+
+            <div>
+                Powered by
+                <br>
+                <strong>
+                    Dustie
+                </strong>
+            </div>
+
+            <div>
+                © AssetPicker
+                <br>
+                Built with DustyDraft
+            </div>
+
+        </footer>
+
+
+    </div>
+
+</div>

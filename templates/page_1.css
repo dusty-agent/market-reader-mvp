@@ -4,16 +4,14 @@
 
 @font-face {
 
-  font-family: "Pretendard";
+    font-family: "Pretendard";
 
-  src:
-    url("{{PRETENDARD_FONT}}")
-    format("truetype");
+    src:
+        url("{{PRETENDARD_FONT}}")
+        format("truetype");
 
-  font-weight: 100 900;
-
-  font-style: normal;
-
+    font-weight: 100 900;
+    font-style: normal;
 }
 
 
@@ -23,40 +21,37 @@
 
 :root {
 
-  --paper: #ffffff;
+    --paper: #ffffff;
 
-  --gold: #d4af37;
+    --gold: #d4af37;
+    --gold-soft: #e2c363;
 
-  --gold-soft: #e2c363;
+    --line:
+        rgba(
+            255,
+            255,
+            255,
+            0.10
+        );
 
-  --line:
-    rgba(
-      255,
-      255,
-      255,
-      0.09
-    );
+    --board:
+        rgba(
+            5,
+            13,
+            23,
+            0.90
+        );
 
-  --board:
-    rgba(
-      5,
-      13,
-      23,
-      0.88
-    );
+    --up: #ef6268;
+    --down: #62aaff;
 
-  --up: #ef6268;
-
-  --down: #62aaff;
-
-  --flat:
-    rgba(
-      255,
-      255,
-      255,
-      0.68
-    );
-
+    --flat:
+        rgba(
+            255,
+            255,
+            255,
+            0.72
+        );
 }
 
 
@@ -65,37 +60,35 @@
 ========================================================= */
 
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 
 html,
 body {
 
-  width: 1080px;
+    width: 1080px;
+    height: 1920px;
 
-  height: 1920px;
+    margin: 0;
+    padding: 0;
 
-  margin: 0;
-
-  overflow: hidden;
-
+    overflow: hidden;
 }
 
 
 body {
 
-  font-family:
-    "Pretendard",
-    Arial,
-    "Noto Sans KR",
-    "Malgun Gothic",
-    sans-serif;
+    font-family:
+        "Pretendard",
+        Arial,
+        "Noto Sans KR",
+        "Malgun Gothic",
+        sans-serif;
 
-  color: var(--paper);
+    color: var(--paper);
 
-  background: #07121e;
-
+    background: #07121e;
 }
 
 
@@ -105,34 +98,32 @@ body {
 
 .page {
 
-  position: relative;
+    position: relative;
 
-  width: 1080px;
+    width: 1080px;
+    height: 1920px;
 
-  height: 1920px;
+    overflow: hidden;
 
-  overflow: hidden;
+    background:
 
-  background:
+        linear-gradient(
+            180deg,
+            rgba(3, 10, 18, 0.28) 0%,
+            rgba(3, 10, 18, 0.42) 44%,
+            rgba(3, 9, 16, 0.76) 100%
+        ),
 
-    linear-gradient(
-      180deg,
-      rgba(3, 10, 18, 0.28) 0%,
-      rgba(3, 10, 18, 0.40) 44%,
-      rgba(3, 9, 16, 0.72) 100%
-    ),
+        url("{{PAGE1_BG}}")
+            center center /
+            cover
+            no-repeat,
 
-    url("{{PAGE1_BG}}")
-      center center /
-      cover
-      no-repeat,
-
-    linear-gradient(
-      180deg,
-      #183047 0%,
-      #07121e 100%
-    );
-
+        linear-gradient(
+            180deg,
+            #183047 0%,
+            #07121e 100%
+        );
 }
 
 
@@ -142,10 +133,9 @@ body {
 
 .safe {
 
-  position: absolute;
+    position: absolute;
 
-  inset: 0 116px;
-
+    inset: 0 92px;
 }
 
 
@@ -155,687 +145,566 @@ body {
 
 .header {
 
-  position: absolute;
+    position: absolute;
 
-  top: 80px;
+    top: 72px;
+    left: 50%;
 
-  left: 50%;
+    transform:
+        translateX(-50%);
 
-  transform:
-    translateX(-50%);
+    width: 100%;
 
-  width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-  display: flex;
-
-  flex-direction: column;
-
-  align-items: center;
-
-  text-align: center;
-
+    text-align: center;
 }
 
 
 .marketreader-brand {
 
-  font-family:
-    "Brush Script MT",
-    "Segoe Script",
-    cursive;
+    font-family:
+        "Brush Script MT",
+        "Segoe Script",
+        cursive;
 
-  font-size: 66px;
+    font-size: 76px;
+    line-height: 1;
 
-  line-height: 1;
+    font-weight: 700;
 
-  font-weight: 700;
+    letter-spacing: -2px;
 
-  letter-spacing: -2px;
+    color: #ffffff;
 
-  color: #ffffff;
+    white-space: nowrap;
 
-  white-space: nowrap;
-
-  text-shadow:
-    0 2px 12px
-    rgba(
-      0,
-      0,
-      0,
-      0.42
-    );
-
+    text-shadow:
+        0 2px 12px
+        rgba(0, 0, 0, 0.42);
 }
 
 
 .brand-arrow {
 
-  margin-left: 4px;
+    margin-left: 5px;
 
-  color: var(--gold);
+    color: var(--gold);
 
-  font-family:
-    Arial,
-    sans-serif;
+    font-family: Arial, sans-serif;
 
-  font-size: 24px;
+    font-size: 30px;
 
-  vertical-align: top;
-
+    vertical-align: top;
 }
 
 
 .marketreader-label {
 
-  margin-top: 14px;
+    margin-top: 17px;
 
-  font-size: 22px;
+    font-size: 25px;
+    font-weight: 700;
 
-  font-weight: 700;
+    letter-spacing: 1.7px;
 
-  letter-spacing: 1.6px;
-
-  color:
-    rgba(
-      255,
-      255,
-      255,
-      0.82
-    );
-
+    color:
+        rgba(
+            255,
+            255,
+            255,
+            0.86
+        );
 }
 
 
 .asof {
 
-  margin-top: 43px;
+    margin-top: 40px;
 
-  padding:
-    13px
-    27px
-    14px;
+    padding:
+        15px
+        30px
+        16px;
 
-  border:
-    1px solid
-    rgba(
-      255,
-      255,
-      255,
-      0.11
-    );
+    border:
+        1px solid
+        rgba(
+            255,
+            255,
+            255,
+            0.12
+        );
 
-  border-radius: 11px;
+    border-radius: 12px;
 
-  background:
-    rgba(
-      2,
-      8,
-      14,
-      0.69
-    );
+    background:
+        rgba(
+            2,
+            8,
+            14,
+            0.72
+        );
 
-  backdrop-filter:
-    blur(8px);
+    backdrop-filter:
+        blur(8px);
 
-  font-size: 25px;
+    font-size: 29px;
+    font-weight: 650;
 
-  font-weight: 600;
-
-  color:
-    rgba(
-      255,
-      255,
-      255,
-      0.94
-    );
-
+    color: #ffffff;
 }
 
 
 /* =========================================================
-   MARKET BOARD
+   SINGLE BOARD
 ========================================================= */
 
-.market-board {
+.single-board {
 
-  position: absolute;
+    position: absolute;
 
-  top: 355px;
+    top: 405px;
+    left: 50%;
 
-  left: 50%;
+    transform:
+        translateX(-50%);
 
-  transform:
-    translateX(-50%);
+    width: 896px;
 
-  width: 848px;
+    overflow: hidden;
 
-  overflow: hidden;
+    border:
+        1px solid
+        rgba(
+            255,
+            255,
+            255,
+            0.13
+        );
 
-  border:
-    1px solid
-    rgba(
-      255,
-      255,
-      255,
-      0.12
-    );
+    border-radius: 30px;
 
-  border-radius: 28px;
+    background:
+        var(--board);
 
-  background:
-    var(--board);
+    box-shadow:
+        0 26px 68px
+        rgba(0, 0, 0, 0.32);
 
-  box-shadow:
-    0 24px 64px
-    rgba(
-      0,
-      0,
-      0,
-      0.30
-    );
-
-  backdrop-filter:
-    blur(14px);
-
+    backdrop-filter:
+        blur(14px);
 }
 
 
 /* =========================================================
-   SECTIONS
+   SINGLE HEADER
 ========================================================= */
 
-.board-section {
+.single-heading {
 
-  width: 100%;
+    min-height: 160px;
 
+    padding:
+        32px
+        42px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(212, 175, 55, 0.13),
+            rgba(212, 175, 55, 0.018)
+        );
+
+    border-bottom:
+        1px solid
+        var(--line);
 }
 
 
-.loan-section {
+.single-title {
 
-  border-top:
-    1px solid
-    rgba(
-      212,
-      175,
-      55,
-      0.22
-    );
+    color: var(--gold);
 
+    font-size: 58px;
+    line-height: 1;
+
+    font-weight: 850;
+
+    letter-spacing: -1.2px;
 }
 
 
-/* =========================================================
-   SECTION HEADER
-========================================================= */
+.single-subtitle {
 
-.section-heading {
+    margin-top: 14px;
 
-  height: 104px;
+    color:
+        rgba(
+            255,
+            255,
+            255,
+            0.72
+        );
 
-  padding:
-    0
-    34px;
+    font-size: 25px;
+    font-weight: 650;
 
-  display: flex;
-
-  align-items: center;
-
-  justify-content: space-between;
-
-  background:
-
-    linear-gradient(
-      90deg,
-      rgba(212, 175, 55, 0.10),
-      rgba(212, 175, 55, 0.015)
-    );
-
-  border-bottom:
-    1px solid
-    var(--line);
-
+    letter-spacing: -0.3px;
 }
 
 
-.section-title {
+.single-date {
 
-  color: var(--gold);
+    color:
+        rgba(
+            255,
+            255,
+            255,
+            0.68
+        );
 
-  font-size: 34px;
+    font-size: 23px;
+    font-weight: 550;
 
-  line-height: 1;
-
-  font-weight: 800;
-
-  letter-spacing: -0.6px;
-
-}
-
-
-.section-subtitle {
-
-  margin-top: 8px;
-
-  color:
-    rgba(
-      255,
-      255,
-      255,
-      0.45
-    );
-
-  font-size: 15px;
-
-  font-weight: 650;
-
-  letter-spacing: 1.5px;
-
-}
-
-
-.section-date {
-
-  color:
-    rgba(
-      255,
-      255,
-      255,
-      0.52
-    );
-
-  font-size: 17px;
-
-  font-weight: 500;
-
-  white-space: nowrap;
-
+    white-space: nowrap;
 }
 
 
 /* =========================================================
-   FX HEADER
+   FX
 ========================================================= */
 
 .fx-columns,
 .fx-row {
 
-  display: grid;
+    display: grid;
 
-  grid-template-columns:
-    38%
-    31%
-    31%;
-
+    grid-template-columns:
+        37%
+        32%
+        31%;
 }
 
 
 .fx-columns {
 
-  height: 55px;
+    height: 82px;
 
-  align-items: center;
+    align-items: center;
 
-  border-bottom:
-    1px solid
-    var(--line);
+    border-bottom:
+        1px solid
+        var(--line);
 
-  color: var(--gold-soft);
+    color: var(--gold-soft);
 
-  font-size: 17px;
+    font-size: 22px;
+    font-weight: 750;
 
-  font-weight: 700;
-
-  letter-spacing: 0.6px;
-
+    letter-spacing: 0.7px;
 }
 
 
 .fx-columns > div {
 
-  padding:
-    0
-    28px;
-
+    padding:
+        0
+        32px;
 }
 
 
 .fx-columns > div:nth-child(2),
 .fx-columns > div:nth-child(3) {
 
-  text-align: right;
-
+    text-align: right;
 }
 
 
-/* =========================================================
-   FX ROW
-========================================================= */
-
 .fx-row {
 
-  height: 126px;
+    height: 218px;
 
-  align-items: center;
+    align-items: center;
 
-  border-bottom:
-    1px solid
-    var(--line);
+    border-bottom:
+        1px solid
+        var(--line);
+}
 
+
+.fx-row:last-child {
+    border-bottom: none;
 }
 
 
 .fx-row > div {
 
-  height: 100%;
+    height: 100%;
 
-  display: flex;
+    display: flex;
+    align-items: center;
 
-  align-items: center;
-
-  padding:
-    0
-    28px;
-
+    padding:
+        0
+        32px;
 }
 
 
 .fx-row > div + div {
 
-  border-left:
-    1px solid
-    rgba(
-      255,
-      255,
-      255,
-      0.055
-    );
-
+    border-left:
+        1px solid
+        rgba(
+            255,
+            255,
+            255,
+            0.06
+        );
 }
 
 
-/* =========================================================
-   FX ASSET
-========================================================= */
-
 .asset {
 
-  gap: 14px;
+    gap: 17px;
 
-  font-size: 27px;
+    font-size: 34px;
+    font-weight: 780;
 
-  font-weight: 750;
+    letter-spacing: -0.5px;
 
-  letter-spacing: -0.4px;
-
-  white-space: nowrap;
-
+    white-space: nowrap;
 }
 
 
 .currency {
 
-  width: 39px;
+    width: 54px;
+    height: 54px;
 
-  height: 39px;
+    display: inline-flex;
 
-  display: inline-flex;
+    align-items: center;
+    justify-content: center;
 
-  align-items: center;
+    flex: 0 0 auto;
 
-  justify-content: center;
+    border:
+        1px solid
+        rgba(
+            212,
+            175,
+            55,
+            0.50
+        );
 
-  flex: 0 0 auto;
+    border-radius: 50%;
 
-  border:
-    1px solid
-    rgba(
-      212,
-      175,
-      55,
-      0.42
-    );
+    color: var(--gold);
 
-  border-radius: 50%;
+    background:
+        rgba(
+            212,
+            175,
+            55,
+            0.07
+        );
 
-  color: var(--gold);
-
-  background:
-    rgba(
-      212,
-      175,
-      55,
-      0.06
-    );
-
-  font-size: 20px;
-
-  font-weight: 750;
-
+    font-size: 29px;
+    font-weight: 800;
 }
 
 
-/* =========================================================
-   FX VALUE
-========================================================= */
-
 .latest {
 
-  justify-content: flex-end;
+    justify-content: flex-end;
 
-  font-size: 31px;
+    font-size: 49px;
+    font-weight: 820;
 
-  font-weight: 760;
+    letter-spacing: -1px;
 
-  letter-spacing: -0.6px;
-
-  white-space: nowrap;
-
+    white-space: nowrap;
 }
 
 
 .change {
 
-  justify-content: flex-end;
+    justify-content: flex-end;
 
-  gap: 8px;
+    gap: 10px;
 
-  font-size: 25px;
+    font-size: 33px;
+    font-weight: 780;
 
-  font-weight: 750;
-
-  white-space: nowrap;
-
+    white-space: nowrap;
 }
 
 
 .change-arrow {
-
-  font-size: 18px;
-
+    font-size: 25px;
 }
 
 
 .change.up {
-  color: var(--up);
+    color: var(--up);
 }
 
 
 .change.down {
-  color: var(--down);
+    color: var(--down);
 }
 
 
 .change.flat {
-  color: var(--flat);
+    color: var(--flat);
 }
 
 
 /* =========================================================
-   LOAN HEADER
+   KEXIM
 ========================================================= */
 
 .loan-columns,
 .loan-row {
 
-  display: grid;
+    display: grid;
 
-  grid-template-columns:
-    68%
-    32%;
-
+    grid-template-columns:
+        67%
+        33%;
 }
 
 
 .loan-columns {
 
-  height: 55px;
+    height: 82px;
 
-  align-items: center;
+    align-items: center;
 
-  border-bottom:
-    1px solid
-    var(--line);
+    border-bottom:
+        1px solid
+        var(--line);
 
-  color: var(--gold-soft);
+    color: var(--gold-soft);
 
-  font-size: 17px;
+    font-size: 22px;
+    font-weight: 750;
 
-  font-weight: 700;
-
-  letter-spacing: 0.6px;
-
+    letter-spacing: 0.7px;
 }
 
 
 .loan-columns > div {
 
-  padding:
-    0
-    32px;
-
+    padding:
+        0
+        40px;
 }
 
 
 .loan-columns > div:last-child {
-  text-align: right;
+    text-align: right;
 }
 
 
-/* =========================================================
-   LOAN ROW
-========================================================= */
-
 .loan-row {
 
-  height: 99px;
+    height: 168px;
 
-  align-items: center;
+    align-items: center;
 
-  border-bottom:
-    1px solid
-    var(--line);
-
+    border-bottom:
+        1px solid
+        var(--line);
 }
 
 
 .loan-row:last-child {
-
-  border-bottom: none;
-
+    border-bottom: none;
 }
 
 
 .loan-row > div {
 
-  height: 100%;
+    height: 100%;
 
-  display: flex;
+    display: flex;
 
-  align-items: center;
+    align-items: center;
 
-  padding:
-    0
-    32px;
-
+    padding:
+        0
+        40px;
 }
 
 
 .loan-row > div + div {
 
-  border-left:
-    1px solid
-    rgba(
-      255,
-      255,
-      255,
-      0.055
-    );
-
+    border-left:
+        1px solid
+        rgba(
+            255,
+            255,
+            255,
+            0.06
+        );
 }
 
 
-/* =========================================================
-   LOAN TERM
-========================================================= */
-
 .loan-term {
 
-  gap: 20px;
-
+    gap: 26px;
 }
 
 
 .loan-term strong {
 
-  width: 58px;
+    width: 82px;
 
-  color: var(--gold);
+    color: var(--gold);
 
-  font-size: 27px;
+    font-size: 43px;
+    font-weight: 850;
 
-  font-weight: 800;
-
-  letter-spacing: -0.5px;
-
+    letter-spacing: -0.7px;
 }
 
 
 .loan-term span {
 
-  color:
-    rgba(
-      255,
-      255,
-      255,
-      0.84
-    );
+    color:
+        rgba(
+            255,
+            255,
+            255,
+            0.90
+        );
 
-  font-size: 23px;
+    font-size: 29px;
+    font-weight: 650;
 
-  font-weight: 600;
-
-  letter-spacing: -0.4px;
-
+    letter-spacing: -0.5px;
 }
 
 
-/* =========================================================
-   LOAN RATE
-========================================================= */
-
 .loan-rate {
 
-  justify-content: flex-end;
+    justify-content: flex-end;
 
-  color: #ffffff;
+    color: #ffffff;
 
-  font-size: 31px;
+    font-size: 49px;
+    font-weight: 820;
 
-  font-weight: 780;
-
-  letter-spacing: -0.5px;
-
+    letter-spacing: -0.8px;
 }
 
 
@@ -845,33 +714,28 @@ body {
 
 .source {
 
-  position: absolute;
+    position: absolute;
 
-  top: 1548px;
+    top: 1530px;
+    left: 50%;
 
-  left: 50%;
+    transform:
+        translateX(-50%);
 
-  transform:
-    translateX(-50%);
+    width: 896px;
 
-  width: 848px;
+    color:
+        rgba(
+            255,
+            255,
+            255,
+            0.60
+        );
 
-  color:
-    rgba(
-      255,
-      255,
-      255,
-      0.52
-    );
+    font-size: 21px;
+    font-weight: 550;
 
-  font-size: 18px;
-
-  font-weight: 500;
-
-  text-align: right;
-
-  letter-spacing: 0.2px;
-
+    text-align: right;
 }
 
 
@@ -881,80 +745,73 @@ body {
 
 .footer {
 
-  position: absolute;
+    position: absolute;
 
-  left: 50%;
+    left: 50%;
+    bottom: 39px;
 
-  bottom: 39px;
+    transform:
+        translateX(-50%);
 
-  transform:
-    translateX(-50%);
+    width: 760px;
+    height: 82px;
 
-  width: 690px;
+    border-top:
+        1px solid
+        rgba(
+            255,
+            255,
+            255,
+            0.11
+        );
 
-  height: 72px;
+    display: grid;
 
-  border-top:
-    1px solid
-    rgba(
-      255,
-      255,
-      255,
-      0.10
-    );
+    grid-template-columns:
+        1fr
+        1fr
+        1fr;
 
-  display: grid;
+    align-items: center;
 
-  grid-template-columns:
-    1fr
-    1fr
-    1fr;
+    color:
+        rgba(
+            255,
+            255,
+            255,
+            0.56
+        );
 
-  align-items: center;
+    font-size: 18px;
+    line-height: 1.35;
 
-  color:
-    rgba(
-      255,
-      255,
-      255,
-      0.50
-    );
-
-  font-size: 16px;
-
-  line-height: 1.35;
-
-  text-align: center;
-
+    text-align: center;
 }
 
 
 .footer .assetpicker {
 
-  font-family:
-    "Brush Script MT",
-    "Segoe Script",
-    cursive;
+    font-family:
+        "Brush Script MT",
+        "Segoe Script",
+        cursive;
 
-  font-size: 24px;
+    font-size: 29px;
+    font-weight: 700;
 
-  font-weight: 700;
-
-  color:
-    rgba(
-      255,
-      255,
-      255,
-      0.72
-    );
-
+    color:
+        rgba(
+            255,
+            255,
+            255,
+            0.76
+        );
 }
 
 
 .footer strong {
 
-  color: #c69a27;
+    color: #c69a27;
 
-  font-weight: 800;
-
+    font-weight: 800;
 }
