@@ -33,12 +33,21 @@ jobs:
           else
             echo "EXCHANGE KEY: EMPTY"
           fi
-      
+
           if [ -n "$KOREAEXIM_INTEREST_API_KEY" ]; then
             echo "INTEREST KEY: OK"
             echo "INTEREST KEY LENGTH: ${#KOREAEXIM_INTEREST_API_KEY}"
           else
             echo "INTEREST KEY: EMPTY"
           fi
+
+      - name: Generate and email
+        env:
+          MAIL_SENDER: ${{ secrets.MAIL_SENDER }}
+          MAIL_APP_PASSWORD: ${{ secrets.MAIL_APP_PASSWORD }}
+          MAIL_RECIPIENT: ${{ secrets.MAIL_RECIPIENT }}
+
+          KOREAEXIM_EXCHANGE_API_KEY: ${{ secrets.KOREAEXIM_EXCHANGE_API_KEY }}
+          KOREAEXIM_INTEREST_API_KEY: ${{ secrets.KOREAEXIM_INTEREST_API_KEY }}
 
         run: python main.py
