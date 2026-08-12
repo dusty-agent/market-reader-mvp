@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
   schedule:
-    - cron: "40 9 * * *"
+    - cron: "46 9 * * *"
 
 jobs:
   build:
@@ -21,6 +21,11 @@ jobs:
 
       - name: Install dependencies
         run: pip install -r requirements.txt
+
+      - name: Install FFmpeg
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
 
       - name: Check secrets
         env:
@@ -49,5 +54,7 @@ jobs:
 
           KOREAEXIM_EXCHANGE_API_KEY: ${{ secrets.KOREAEXIM_EXCHANGE_API_KEY }}
           KOREAEXIM_INTEREST_API_KEY: ${{ secrets.KOREAEXIM_INTEREST_API_KEY }}
+
+          FFMPEG_PATH: /usr/bin/ffmpeg
 
         run: python main.py
