@@ -14,6 +14,8 @@ from collectors import fetch_all
 from config import OUTPUT, ROOT
 from render import render_pages
 
+from send_email import send_video_email
+
 
 # =========================================================
 # MAIN
@@ -246,6 +248,14 @@ def main():
             f"[OK] VIDEO  : {video_out}"
         )
 
+    # =====================================================
+    # EMAIL
+    # =====================================================
+
+    send_video_email(
+        video_path=video_out,
+        subject=f"환율 전광판 | {stamp}",
+    )
 
 # =========================================================
 # ENTRY POINT

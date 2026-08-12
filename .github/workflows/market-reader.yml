@@ -1,11 +1,10 @@
-name: MarketReader Daily
+name: Exchange Board Test
 
 on:
-  schedule:
-    - cron: "30 6 * * 1-5"
-      timezone: "Asia/Seoul"
-
   workflow_dispatch:
+
+  schedule:
+    - cron: "25 7 * * *"
 
 jobs:
   build:
@@ -15,31 +14,21 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up Python
+      - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
       - name: Install dependencies
-        run: |
-          pip install -r requirements.txt
-          python -m playwright install chromium
+        run: pip install -r requirements.txt
 
-      - name: Install FFmpeg
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y ffmpeg
-
-      - name: Build MarketReader
+      - name: Generate and email
         env:
-          KOREAEXIM_EXCHANGE_API_KEY: ${{ secrets.KOREAEXIM_EXCHANGE_API_KEY }}
-          KOREAEXIM_INTEREST_API_KEY: ${{ secrets.KOREAEXIM_INTEREST_API_KEY }}
-        run: |
-          python main.py
+          MAIL_SENDER: ${{ secrets.MAIL_SENDER }}
+          MAIL_APP_PASSWORD: ${{ secrets.MAIL_APP_PASSWORD }}
+          MAIL_RECIPIENT: ${{ secrets.MAIL_RECIPIENT }}
 
-      - name: Upload MarketReader video
-        uses: actions/upload-artifact@v4
-        with:
-          name: market-reader
-          path: output/**/market_reader.mp4
-          retention-days: 7
+          # 지금 프로그램에서 실제 사용하는 API 키도 여기에
+          KEXIM_API_KEY: ${{ secrets.KEXIM_API_KEY }}
+
+        run: python main.py
