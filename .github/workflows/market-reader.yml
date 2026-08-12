@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
   schedule:
-    - cron: "35 9 * * *"
+    - cron: "40 9 * * *"
 
 jobs:
   build:
@@ -22,13 +22,23 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Generate and email
+      - name: Check secrets
         env:
-          MAIL_SENDER: ${{ secrets.MAIL_SENDER }}
-          MAIL_APP_PASSWORD: ${{ secrets.MAIL_APP_PASSWORD }}
-          MAIL_RECIPIENT: ${{ secrets.MAIL_RECIPIENT }}
-
           KOREAEXIM_EXCHANGE_API_KEY: ${{ secrets.KOREAEXIM_EXCHANGE_API_KEY }}
           KOREAEXIM_INTEREST_API_KEY: ${{ secrets.KOREAEXIM_INTEREST_API_KEY }}
+        run: |
+          if [ -n "$KOREAEXIM_EXCHANGE_API_KEY" ]; then
+            echo "EXCHANGE KEY: OK"
+            echo "EXCHANGE KEY LENGTH: ${#KOREAEXIM_EXCHANGE_API_KEY}"
+          else
+            echo "EXCHANGE KEY: EMPTY"
+          fi
+      
+          if [ -n "$KOREAEXIM_INTEREST_API_KEY" ]; then
+            echo "INTEREST KEY: OK"
+            echo "INTEREST KEY LENGTH: ${#KOREAEXIM_INTEREST_API_KEY}"
+          else
+            echo "INTEREST KEY: EMPTY"
+          fi
 
         run: python main.py
