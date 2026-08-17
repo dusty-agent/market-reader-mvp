@@ -1,4 +1,4 @@
-name: Exchange Board Test
+name: Market Reader Daily
 
 on:
   workflow_dispatch:
